@@ -6,7 +6,9 @@
 axios
   .get("https://api.github.com/users/RoskiDeluge")
   .then(response => {
-    console.log(response);
+    const newUser = response;
+    // console.log(newUser);
+    parentElement.appendChild(userCards(newUser));
   });
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
@@ -80,20 +82,23 @@ const userCards = (user) => {
   userName.classList.add('name');
   userUname.classList.add('username');
 
-  userImg.src = data.avatar_url;
-  userName.textContent = data.name;
-  userUname.textContent = data.login;
-  userLocation.textContent = data.location;
-  userProfile.textContent = data.html_url;
-  userFollowers.textContent = data.followers_url;
-  userFollowing.textContent = data.following_url;
-  userBio.textContent = data.bio;
+  userImg.src = user.data.avatar_url;
+  userName.textContent = user.data.name;
+  userUname.textContent = user.data.login;
+  userLocation.textContent = user.data.location;
+  userProfile.textContent = user.data.html_url;
+  userFollowers.textContent = user.data.followers_url;
+  userFollowing.textContent = user.data.following_url;
+  userBio.textContent = user.data.bio;
 
-  
 
   return userCard
 
 }
+
+const parentElement = document.querySelector('.cards');
+
+// parentElement.appendChild(userCards());
 
 /* List of LS Instructors Github username's: 
   tetondan
