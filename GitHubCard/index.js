@@ -3,6 +3,14 @@
            https://api.github.com/users/<your name>
 */
 
+axios
+  .get("https://api.github.com/users/RoskiDeluge")
+  .then(response => {
+    const newUser = response;
+    // console.log(newUser);
+    parentElement.appendChild(userCards(newUser));
+  });
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -45,6 +53,52 @@ const followersArray = [];
 </div>
 
 */
+
+const userCards = (user) => {
+
+  const userCard = document.createElement('div');
+  const userImg = document.createElement('img');
+  const userInfo = document.createElement('div');
+  const userName = document.createElement('h3');
+  const userUname = document.createElement('p');
+  const userLocation = document.createElement('p');
+  const userProfile = document.createElement('p');
+  const userFollowers = document.createElement('p');
+  const userFollowing = document.createElement('p');
+  const userBio = document.createElement('p');
+
+  userCard.appendChild(userImg);
+  userCard.appendChild(userInfo);
+  userInfo.appendChild(userName);
+  userInfo.appendChild(userUname);
+  userInfo.appendChild(userLocation);
+  userInfo.appendChild(userProfile);
+  userInfo.appendChild(userFollowers);
+  userInfo.appendChild(userFollowing);
+  userInfo.appendChild(userBio);
+
+  userCard.classList.add('card');
+  userInfo.classList.add('card-info');
+  userName.classList.add('name');
+  userUname.classList.add('username');
+
+  userImg.src = user.data.avatar_url;
+  userName.textContent = user.data.name;
+  userUname.textContent = user.data.login;
+  userLocation.textContent = user.data.location;
+  userProfile.textContent = user.data.html_url;
+  userFollowers.textContent = user.data.followers_url;
+  userFollowing.textContent = user.data.following_url;
+  userBio.textContent = user.data.bio;
+
+
+  return userCard
+
+}
+
+const parentElement = document.querySelector('.cards');
+
+// parentElement.appendChild(userCards());
 
 /* List of LS Instructors Github username's: 
   tetondan
